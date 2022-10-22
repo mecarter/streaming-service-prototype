@@ -1,34 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Streaming Service Prototype
 
-## Getting Started
+## Get Started
 
-First, run the development server:
+This project is built using [Next.js](https://nextjs.org) and [Chakra UI](https://chakra-ui.com/) because I thought it would be fun to spend more time with these frameworks and familiarize myself with their usage.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### To view this project online
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+https://streaming-service-prototype.vercel.app/series/tt0106179/5
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### To run this repo locally:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. Go to https://omdbapi.com and get an API key.
+1. Rename `.env.local.example` -> `.env.local` and add your API key to this file
+1. `npm install`.
+1. `npm run dev` to run in Dev mode, or `npm run build && npm start` to run in Production mode.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Notes
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- The design comp provided is fairly simple in that it does not account for different app states. I took some liberties with the functionality and design in order to account for this, especially at the small table and mobile level.
+- In addition, rather than use the exact pixel values provided in the design comp I opted to use Chakra's fontSize presets and chose the variables that most closely matched the font styles or spacing at the provided viewport size.
+- I quickly discovered that the OMDB API is not very robust in the data that it provides. For example, for most TV shows I tried to input, there were only a handful of Episodes available for each Season.
+- To create the initial data payload I'm doing a ton of API calls. This would not be reasonable in an actual app with hundreds of shows, but the good news is that Next.js is running these API calls during the build process so it wouldn't affect the client even if it were built this way (probably just cause innumerable headaches for the devs). Also, because of the quick turnaround for the assignment, I've left out error handling and error states for these API calls. This is something that would absolutely need to be accounted for in a production app.
+- The Episodes Slider is very very basic. There's no touch events, no a11y support, and the logic is not amazing. I just wanted to show a quick-and-dirty example of how it might animate. There's also no debouncing happening on the window resize event for recalculating the slideshow, which is not ideal.
